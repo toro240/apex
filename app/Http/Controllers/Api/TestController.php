@@ -11,15 +11,18 @@ class TestController extends Controller
 {
   public function index(Request $request)
   {
+    echo 'index...';
     /** @var LINEBot $bot */
     $bot = app('line-bot');
 
     if (!isset($_SERVER['HTTP_'.LINEBot\Constant\HTTPHeader::LINE_SIGNATURE])) {
+      echo 'isset...';
       return;
     }
 
     $signature = $_SERVER['HTTP_' . LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
     if (!LINEBot\SignatureValidator::validateSignature($request->getContent(), env('LINE_CHANNEL_SECRET'), $signature)) {
+      echo 'validateSignature...';
       return;
     }
 
