@@ -20,6 +20,6 @@ class LineApi
 
     public function isUseLineApi()
     {
-      return !is_null($this->events)
+      return !is_null($this->events);
     }
 }
