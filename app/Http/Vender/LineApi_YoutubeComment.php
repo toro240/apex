@@ -2,7 +2,7 @@
 
 namespace App\Http\Vender;
 
-use LineApi;
+use App\Http\Vender\LineApi;
 use LINE\LINEBot;
 
 class LineApi_YoutubeComment extends LineApi
