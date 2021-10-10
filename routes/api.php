@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('test','Api\TestController@index');
+// Route::get('test','Api\TestController@index');
