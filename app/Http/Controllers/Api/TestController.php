@@ -34,6 +34,11 @@ class TestController extends Controller
         continue;
       }
 
+      $message = $event['message'];
+      if(!str_starts_with($message, '/コメント')) {
+        continue;
+      }
+
       $bot->replyText($reply_token, 'hoge');
     }
 
