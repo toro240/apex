@@ -3,6 +3,7 @@
 namespace App\Http\Vender;
 
 use LINE\LINEBot;
+use Illuminate\Http\Request;
 
 class LineApi
 {
