@@ -35,7 +35,7 @@ class LineApi_YoutubeComment extends LineApi
           array_push($sendTexts, $comment['textDisplay'] . PHP_EOL . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
         }
 
-        $this->lineBot->replyText($replyToken, '動画に対するコメントです。' . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~' . PHP_EOL . implode(PHP_EOL, $sendTexts));
+        $this->lineBot->replyText($replyToken, '動画のコメントよ。' . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~' . PHP_EOL . implode(PHP_EOL, $sendTexts));
       }
     }
 }
