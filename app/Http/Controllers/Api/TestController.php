@@ -5,11 +5,35 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Vender\YoutubeApi;
+use LINE\LINEBot;
 
 class TestController extends Controller
 {
-  public function index()
+  public function index(Request $request)
   {
+    /** @var LINEBot $bot */
+    $bot = app('line-bot');
+
+    if (!isset($_SERVER['HTTP_'.LINEBot\Constant\HTTPHeader::LINE_SIGNATURE])) {
+      return;
+    }
+
+    $signature = $_SERVER['HTTP_' . LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+    if (!LINEBot\SignatureValidator::validateSignature($request->getContent(), env('LINE_CHANNEL_SECRET'), $signature)) {
+      return;
+    }
+
+    $events = $bot->parseEventRequest($request->getContent(), $signature);
+
+    /** @var LINEBot\Event\BaseEvent $event */
+    foreach ($events as $event) {
+      $reply_token = $event->getReplyToken();
+      if (!$event instanceof TextMessage) {
+        continue;
+      }
+      $bot->replyText($reply_token, 'hoge');
+    }
+
     $youtubeApi = new YoutubeApi();
     $comments = $youtubeApi->getTopLevelCommentsForChannelId('UC_DXwXoaSsY1vN5dJjrCi1w');
     return $comments;
