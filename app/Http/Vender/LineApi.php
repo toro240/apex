@@ -2,19 +2,24 @@
 
 namespace App\Http\Vender;
 
-use DateTime;
-use Google_Client;
-use Google_Service_YouTube;
-use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot;
 
 class LineApi
 {
-    private $lineBot;
+    protected $lineBot;
+    protected $events;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
-      $http_client = new CurlHTTPClient(env('LINE_ACCESS_TOKEN'));
-      $this->lineBot = new LINEBot($http_client, ['channelSecret' => env('LINE_CHANNEL_SECRET')]);
+      $this->lineBot = app('line-bot');
+      $signature = $request->headers->get(LINEBot\Constant\HTTPHeader::LINE_SIGNATURE);
+      if (isset($signature) && LINEBot\SignatureValidator::validateSignature($request->getContent(), env('LINE_CHANNEL_SECRET'), $signature)) {
+        $this->events = $this->lineBot->parseEventRequest($request->getContent(), $signature);
+      }
+    }
+
+    public function isUseLineApi()
+    {
+      return !is_null($this->events)
     }
 }
