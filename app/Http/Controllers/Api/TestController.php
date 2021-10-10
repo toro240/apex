@@ -28,9 +28,11 @@ class TestController extends Controller
     /** @var LINEBot\Event\BaseEvent $event */
     foreach ($events as $event) {
       $reply_token = $event->getReplyToken();
+      echo 'event';
       if (!$event instanceof TextMessage) {
         continue;
       }
+      echo 'textMessage';
       $bot->replyText($reply_token, 'hoge');
     }
 
