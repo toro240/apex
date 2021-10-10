@@ -8,64 +8,34 @@ use App\Http\Vender\YoutubeApi;
 
 class LineApi_YoutubeComment extends LineApi
 {
-    private $member_ids = [
-      '西尾真' => [
-        'channelId' => 'UC_DXwXoaSsY1vN5dJjrCi1w',
-      ],
-      'にぶたに' => [
-        'channelId' => 'UCvQMtplgGxSrObwZCM9vmHw',
-      ],
-      '達也伊藤' => [
-        'channelId' => 'UCL5ocCJCmUE_aLdzgKCsA2Q',
-      ]
-    ];
-
-    private $watch_link = "https://www.youtube.com/watch?v=";
 
     public function sendYoutubeComment()
     {
       $youtubeApi = new YoutubeApi();
 
       foreach ($this->events as $event) {
-        $reply_token = $event->getReplyToken();
+        $replyToken = $event->getReplyToken();
         if (!$event instanceof LINEBot\Event\MessageEvent\TextMessage) {
           return;
         }
 
         $message = $event->getText();
-        $message_list = explode(PHP_EOL, $message);
-
-        if(!str_starts_with($message, '/コメント')) {
+        preg_match('/(?J)^(https:\/\/www.youtube.com\/watch\?v=(?P<name>.*)$)|^(https:\/\/youtu.be\/(?P<name>.*)$)/', $message, $matches);
+        if(!isset($matches['name'])) {
           return;
         }
+        $videoId = $matches['name'];
+        $comments = $youtubeApi->getMostRecentCommentsForVideoId($videoId);
 
-        if(!isset($message_list[1]) || !isset($this->member_ids[$message_list[1]])) {
-          return;
-        }
-
-        $channel_name = $message_list[1];
-
-        $comments = $youtubeApi->getTopLevelCommentsForChannelId($this->member_ids[$channel_name]['channelId']);
-        $group_video_ids = [];
+        $sendTexts = [];
         foreach ($comments as $comment) {
-          $group_video_ids[$comment['videoId']][] = $comment;
+          $comment['textDisplay'] = htmlspecialchars_decode($comment['textDisplay']);
+          $comment['textDisplay'] = str_replace('<br>', PHP_EOL, $comment['textDisplay']);
+          $comment['textDisplay'] = preg_replace('/<a href="(.*?)">.*?<\/a>/', "$1", $comment['textDisplay']);
+          array_push($sendTexts, $comment['textDisplay'] . PHP_EOL . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
         }
 
-        $send_texts = [];
-        foreach ($group_video_ids as $video_id => $group_video_id) {
-          $video_link = $this->watch_link . $video_id;
-          $one_video_texts = [];
-          foreach($group_video_id as $comment) {
-            array_push($one_video_texts, $comment['textOriginal']);
-          }
-
-          array_push(
-            $send_texts,
-            $video_link . PHP_EOL . 'にコメントがあります。' . PHP_EOL . implode(PHP_EOL, $one_video_texts) . PHP_EOL . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-          );
-        }
-
-        $this->lineBot->replyText($reply_token, implode(PHP_EOL, $send_texts));
+        $this->lineBot->replyText($replyToken, '動画に対するコメントです。' . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~' . PHP_EOL . implode(PHP_EOL, $sendTexts));
       }
     }
 }

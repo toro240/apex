@@ -18,15 +18,15 @@ class YoutubeApi
     }
 
     /**
-     * channelIdの動画に対する最新20件のコメントを取得する
+     * videoIdの動画に対する最新20件のコメントを取得する
      *
-     * @param string $channelId channelId
-     * @return array channelIdの動画に対する最新20件のコメント
+     * @param string $videoId videoId
+     * @return array videoIdに対する最新20件のコメント
      */
-    public function getTopLevelCommentsForChannelId(String $channelId)
+    public function getMostRecentCommentsForVideoId(String $videoId)
     {
       $comments = $this->youtube->commentThreads->listCommentThreads('snippet', [
-         'allThreadsRelatedToChannelId' => $channelId
+         'videoId' => $videoId
       ]);
 
       $formated = collect($comments->getItems())->pluck('snippet')->all();
