@@ -19,25 +19,21 @@ class TestController extends Controller
     $signature = $request->headers->get(LINEBot\Constant\HTTPHeader::LINE_SIGNATURE);
     Log::info($signature);
     if (!isset($signature)) {
-      Log::info('isset...');
       return;
     }
 
     if (!LINEBot\SignatureValidator::validateSignature($request->getContent(), env('LINE_CHANNEL_SECRET'), $signature)) {
-      Log::info('validateSignature...');
       return;
     }
 
     $events = $bot->parseEventRequest($request->getContent(), $signature);
 
-    /** @var LINEBot\Event\BaseEvent $event */
     foreach ($events as $event) {
       $reply_token = $event->getReplyToken();
-      Log::info('event');
-      if (!$event instanceof TextMessage) {
+      if (!$event instanceof LINEBot\Event\MessageEvent\TextMessage) {
         continue;
       }
-      Log::info('textMessage');
+
       $bot->replyText($reply_token, 'hoge');
     }
 
