@@ -20,7 +20,7 @@ class LineApi_YoutubeComment extends LineApi
           continue;
         }
 
-        $bot->replyText($reply_token, 'hoge');
+        $this->lineBot->replyText($reply_token, 'hoge');
       }
     }
 }
