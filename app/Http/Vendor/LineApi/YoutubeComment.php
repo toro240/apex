@@ -24,7 +24,7 @@ class YoutubeComment extends LineApi
                 return;
             }
             $videoId = $matches['name'];
-            $comments = $youtubeApi->getMostRecentCommentsForVideoId($videoId);
+            $comments = $youtubeApi->getMostRecentCommentsForVideoIdFilterMemberChannel($videoId);
             if(empty($comments)) {
                 return;
             }

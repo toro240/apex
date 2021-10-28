@@ -10,6 +10,12 @@ class YoutubeApi
 {
     private $youtube;
 
+    private $memberChannelIds = [
+        'UC_DXwXoaSsY1vN5dJjrCi1w', // 西尾真
+        'UCvQMtplgGxSrObwZCM9vmHw', // にぶたに
+        'UCL5ocCJCmUE_aLdzgKCsA2Q', // 達也伊藤
+    ];
+
     public function __construct()
     {
         $client = new Google_Client();
@@ -29,9 +35,34 @@ class YoutubeApi
             'videoId' => $videoId
         ]);
 
-        $formatted = collect($comments->getItems())->pluck('snippet')->all();
-        $topLevelComments = array_column($formatted,'topLevelComment');
+        $snippet = collect($comments->getItems())->pluck('snippet')->all();
+        if (empty($snippet)) {
+            return [];
+        }
+        $topLevelComments = array_column($snippet,'topLevelComment');
         return array_column($topLevelComments,'snippet');
+    }
+
+    /**
+     * $this->memberChannelIds に含まれるチャンネルの動画に対する最新20件のコメントを取得する
+     *
+     * @param string $videoId videoId
+     * @return array videoIdに対する最新20件のコメント
+     */
+    public function getMostRecentCommentsForVideoIdFilterMemberChannel(String $videoId): array
+    {
+        $videos = $this->youtube->videos->listVideos("snippet", [
+            'id' => $videoId,
+        ]);
+        $snippet = collect($videos->getItems())->pluck('snippet')->all();
+        if (empty($snippet)) {
+            return [];
+        }
+        if (!in_array($snippet[0]->channelId, $this->memberChannelIds)) {
+            return [];
+        }
+
+        return $this->getMostRecentCommentsForVideoId($videoId);
     }
 
     /**
