@@ -7,9 +7,8 @@ use App\Rules\HalfWithAlphanumericRule;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
-class LoginPostRequest extends FormRequest
+class ChangePasswordPostRequest extends FormRequest
 {
-    protected $redirect = '/login';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,15 +24,16 @@ class LoginPostRequest extends FormRequest
      *
      * @return array
      */
-    #[ArrayShape(['name' => "string[]", 'password' => "string[]"])] public function rules(): array
+    #[ArrayShape(['password' => "string[]", 'confirmPassword' => "string[]"])] public function rules(): array
     {
         return [
-            'name' => [
+            'password' => [
                 'required',
-                'max:' . User::MAX_NAME_LENGTH,
+                'min:' . User::MIN_PASSWORD_LENGTH,
+                'max:' . User::MAX_PASSWORD_LENGTH,
                 new HalfWithAlphanumericRule(),
             ],
-            'password' => [
+            'confirmPassword' => [
                 'required',
                 'min:' . User::MIN_PASSWORD_LENGTH,
                 'max:' . User::MAX_PASSWORD_LENGTH,

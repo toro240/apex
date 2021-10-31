@@ -53,4 +53,12 @@ class User extends Authenticatable
         }
         return $user;
     }
+
+    public static function updatePassword(int $id, string $password)
+    {
+        return static::query()->where('id', $id)->update([
+           'password' =>  Hash::make($password),
+            'is_change_password' => true,
+        ]);
+    }
 }

@@ -24,10 +24,11 @@ class LoginController extends Controller
         $password = $request->get('password');
         $user = User::getAuthorizationUser($name, $password);
         if (is_null($user)) {
-            return Redirect::back()->withInput()->withErrors(array('message' => 'Incorrect name or password.'));
+            return Redirect::back()->withInput()->withErrors(array('message' => 'Incorrect Name or Password.'));
         }
 
         Auth::login($user);
-        return !$user->isChangePassword ? Redirect::to('/changePassword') : Redirect::to('/changePassword');
+        \Log::debug(print_r($user, true));
+        return $user->is_change_password ? Redirect::to('/home') : Redirect::to('/changePassword');
     }
 }

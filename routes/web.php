@@ -23,6 +23,7 @@ Route::post('/login', 'LoginController@login')->name('login');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/changePassword', 'ChangePasswordController@index')->name('changePassword');
+    Route::post('/changePassword', 'ChangePasswordController@update')->name('changePassword');
 
     Route::middleware(['check.is_changed_password'])->group(function () {
         Route::get('/home', 'HomeController@index')->name('home');
