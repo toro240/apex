@@ -10,7 +10,7 @@ namespace App\Facades;
  */
 class LineBot
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return 'line-bot';
     }

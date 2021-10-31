@@ -2,43 +2,40 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+    protected $guarded = [
+        'created_at',
+        'updated_at',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    const MIN_PASSWORD_LENGTH = 8;
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public static function generateRandomPassword(): string
+    {
+        $password = '';
+        $length = 8;
+        $chars = array_merge(range('a', 'z'), range('A', 'Z'), range('0', '9'));
+        shuffle($chars);
+        for ($i = 0 ; $i < $length ; $i++){
+            $password = $password . $chars[$i];
+        }
+
+        return $password;
+    }
+
+    public static function create(array $attributes = [])
+    {
+        if(isset($attributes['password'])) {
+            $attributes['password'] = Hash::make($attributes['password']);
+        }
+        return static::query()->create($attributes);
+    }
+
 }
