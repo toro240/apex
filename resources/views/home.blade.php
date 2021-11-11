@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.commonHeader')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                HOME
+        @if(!$isJoinedGroup)
+            <div class="container py-4">
+                <div class="alert alert-warning" role="alert">
+                    You're not join Group... Wait until invited or <a href="{{ route('group.create') }}" class="link-primary">Create Group</a>.
+                </div>
             </div>
-        </div>
+        @endif
+        HOME
     </div>
 @endsection

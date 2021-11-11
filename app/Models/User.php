@@ -42,7 +42,7 @@ class User extends Authenticatable
         return static::query()->create($attributes);
     }
 
-    public static function getAuthorizationUser(string $name, string $password): Model|null
+    public static function getAuthorizationUser(string $name, string $password): Model|null|\Illuminate\Contracts\Auth\Authenticatable
     {
         $user = static::query()->where('name', $name)->first();
         if (is_null($user)) {
@@ -54,7 +54,7 @@ class User extends Authenticatable
         return $user;
     }
 
-    public static function updatePassword(int $id, string $password)
+    public static function updatePassword(int $id, string $password): int
     {
         return static::query()->where('id', $id)->update([
            'password' =>  Hash::make($password),

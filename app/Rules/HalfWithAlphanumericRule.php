@@ -25,6 +25,9 @@ class HalfWithAlphanumericRule implements Rule
      */
     public function passes($attribute, $value): bool
     {
+        if (is_null($value)) {
+            return true;
+        }
         return preg_match("/^[a-zA-Z0-9]+$/", $value);
     }
 

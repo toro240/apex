@@ -28,7 +28,7 @@ class LoginController extends Controller
         }
 
         Auth::login($user);
-        \Log::debug(print_r($user, true));
+
         return $user->is_change_password ? Redirect::to('/home') : Redirect::to('/changePassword');
     }
 }
