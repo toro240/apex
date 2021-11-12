@@ -51,9 +51,38 @@ class GroupController extends Controller
                     'user_id' => $user->id,
                 ]);
             }
+
+            session(['group_id' => $group->id]);
         });
 
-        return view('groups.groupCreate');
+        return Redirect::to('/home');
+    }
+
+    public function edit($id): Factory|View|Application
+    {
+        $authUser = Auth::user();
+        $groupMember = GroupMember::whereUserId($authUser->id)->whereGroupId($id)->first();
+        abort_if(is_null($groupMember), Response::HTTP_BAD_REQUEST);
+        $viewParams = [
+            'id' => $id,
+            'name' => $groupMember->group->name
+        ];
+        return view('groups.edit')->with($viewParams);
+    }
+
+    public function update(GroupPostRequest $request, $id): RedirectResponse
+    {
+        $authUser = Auth::user();
+        $groupMember = GroupMember::whereUserId($authUser->id)->whereGroupId($id)->first();
+        abort_if(is_null($groupMember), Response::HTTP_BAD_REQUEST);
+
+        $name = $request->get('name');
+
+        Group::where('id', $id)->update([
+            'name' => $name
+        ]);
+
+        return Redirect::to('/home');
     }
 
     public function change(): Factory|View|Application

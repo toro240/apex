@@ -5,6 +5,7 @@ namespace App\Http\Requests\Groups;
 use App\Models\Group;
 use App\Rules\HalfWithAlphanumericRule;
 use Illuminate\Foundation\Http\FormRequest;
+use JetBrains\PhpStorm\ArrayShape;
 
 class GroupPostRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class GroupPostRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,7 +24,7 @@ class GroupPostRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    #[ArrayShape(['name' => "string[]", 'userName.*' => "\App\Rules\HalfWithAlphanumericRule[]"])] public function rules(): array
     {
         return [
             'name' => [
