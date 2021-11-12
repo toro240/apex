@@ -1,5 +1,5 @@
 {
     "/js/app.js": "/js/app.js",
-    "/js/groups/groupCreate.js": "/js/groups/groupCreate.js",
+    "/js/groups/create.js": "/js/groups/create.js",
     "/css/app.css": "/css/app.css"
 }

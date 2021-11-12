@@ -29,12 +29,21 @@ class SetGroup
     public function handle(Request $request, Closure $next): mixed
     {
         $user = Auth::user();
-        $groupMember = GroupMember::whereUserId($user->id)->first();
-        $groupName = session('group_name');
-        if (is_null($groupName) && $groupMember->exists()) {
-            $groupName = $groupMember->group->name;
-            session(['group_name' => $groupName]);
+        $groupName = null;
+        $groupId = session('group_id');
+        if (is_null($groupId)) {
+            $groupMember = GroupMember::whereUserId($user->id)->first();
+            if (!is_null($groupMember)) {
+                session(['group_id' => $groupMember->group->id]);
+                $groupName = $groupMember->group->name;
+            }
+        } else {
+            $groupMember = GroupMember::whereUserId($user->id)->whereGroupId($groupId)->first();
+            if (!is_null($groupMember)) {
+                $groupName = $groupMember->group->name;
+            }
         }
+
         $this->viewFactory->share('groupName', $groupName);
         return $next($request);
     }
