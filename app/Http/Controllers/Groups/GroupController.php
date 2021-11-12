@@ -104,35 +104,4 @@ class GroupController extends Controller
 
         return Redirect::to('/home');
     }
-
-    /**
-     * グループ変更画面表示
-     * @return Factory|View|Application
-     */
-    public function change(): Factory|View|Application
-    {
-        $authUser = Auth::user();
-        $groupMembers = GroupMember::whereUserId($authUser->id)->get();
-        abort_if(count($groupMembers) == 0, Response::HTTP_FORBIDDEN);
-        $viewParams = [
-            'groupMembers' => $groupMembers,
-        ];
-        return view('groups.change')->with($viewParams);
-    }
-
-    /**
-     * グループ変更処理
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function doChange(Request $request): RedirectResponse
-    {
-        $groupId = $request->get('groupId');
-
-        $authUser = Auth::user();
-        $groupMember = GroupMember::whereUserId($authUser->id)->whereGroupId($groupId)->first();
-        abort_if(is_null($groupMember), Response::HTTP_BAD_REQUEST);
-        session(['group_id' => $groupMember->group->id]);
-        return Redirect::to('/home');
-    }
 }

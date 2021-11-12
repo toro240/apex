@@ -14,7 +14,7 @@
                         </div>
                         @enderror
 
-                        <form method="POST" action="{{ route('group.doChange') }}">
+                        <form method="POST" action="{{ route('group.change.update') }}">
                             @csrf
                             <div class="form-group row">
                                 <div class="col">

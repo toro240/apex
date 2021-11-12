@@ -32,8 +32,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/group', 'Groups\GroupController@store')->name('group.store');
         Route::get('/group/edit/{id}', 'Groups\GroupController@edit')->name('group.edit');
         Route::post('/group/update/{id}', 'Groups\GroupController@update')->name('group.update');
-        Route::get('/group/change', 'Groups\GroupController@change')->name('group.change');
-        Route::post('/group/change', 'Groups\GroupController@doChange')->name('group.doChange');
+
+        Route::get('/group/change', 'Groups\ChangeController@index')->name('group.change.index');
+        Route::post('/group/change', 'Groups\ChangeController@update')->name('group.change.update');
     });
 });
 

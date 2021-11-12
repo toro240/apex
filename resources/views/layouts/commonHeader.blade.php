@@ -12,7 +12,7 @@
                 @endif
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="group-menu">
-                <a class="dropdown-item" href="{{ route('group.change') }}">Change Group</a>
+                <a class="dropdown-item" href="{{ route('group.change.index') }}">Change Group</a>
                 <a class="dropdown-item" href="{{ route('group.create') }}">Create Group</a>
                 @if(isset($groupName))
                 <a class="dropdown-item" href="{{ route('group.edit', ['id' => session('group_id')]) }}">Edit Group</a>
