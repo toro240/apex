@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    /**
+     * トップ画面表示
+     * @return Factory|View|Application
+     */
     public function index(): Factory|View|Application
     {
         $user = Auth::user();

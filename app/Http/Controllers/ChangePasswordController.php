@@ -13,11 +13,20 @@ use Illuminate\Support\Facades\Redirect;
 
 class ChangePasswordController extends Controller
 {
+    /**
+     * 初回パスワード変更画面
+     * @return Factory|View|Application
+     */
     public function index(): Factory|View|Application
     {
         return view('changePassword');
     }
 
+    /**
+     * 初回パスワード変更処理
+     * @param ChangePasswordPostRequest $request
+     * @return RedirectResponse
+     */
     public function update(ChangePasswordPostRequest $request): RedirectResponse
     {
         $password = $request->get('password');

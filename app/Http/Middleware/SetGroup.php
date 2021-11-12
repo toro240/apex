@@ -20,7 +20,7 @@ class SetGroup
     }
 
     /**
-     * Handle an incoming request.
+     * グループの選択状態をヘッダーに表示する
      *
      * @param Request $request
      * @param Closure $next

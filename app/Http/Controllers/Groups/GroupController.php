@@ -19,11 +19,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class GroupController extends Controller
 {
+    /**
+     * グループ作成画面
+     * @return Factory|View|Application
+     */
     public function create(): Factory|View|Application
     {
         return view('groups.create');
     }
 
+    /**
+     * グループ作成処理
+     * @param GroupPostRequest $request
+     * @return Application|Factory|View|RedirectResponse
+     */
     public function store(GroupPostRequest $request): Application|Factory|View|RedirectResponse
     {
         $name = $request->get('name');
@@ -58,7 +67,12 @@ class GroupController extends Controller
         return Redirect::to('/home');
     }
 
-    public function edit($id): Factory|View|Application
+    /**
+     * グループ編集画面表示
+     * @param int $id groups.id
+     * @return Factory|View|Application
+     */
+    public function edit(int $id): Factory|View|Application
     {
         $authUser = Auth::user();
         $groupMember = GroupMember::whereUserId($authUser->id)->whereGroupId($id)->first();
@@ -70,7 +84,13 @@ class GroupController extends Controller
         return view('groups.edit')->with($viewParams);
     }
 
-    public function update(GroupPostRequest $request, $id): RedirectResponse
+    /**
+     * グループ編集処理
+     * @param GroupPostRequest $request
+     * @param int $id groups.id
+     * @return RedirectResponse
+     */
+    public function update(GroupPostRequest $request, int $id): RedirectResponse
     {
         $authUser = Auth::user();
         $groupMember = GroupMember::whereUserId($authUser->id)->whereGroupId($id)->first();
@@ -85,6 +105,10 @@ class GroupController extends Controller
         return Redirect::to('/home');
     }
 
+    /**
+     * グループ変更画面表示
+     * @return Factory|View|Application
+     */
     public function change(): Factory|View|Application
     {
         $authUser = Auth::user();
@@ -96,6 +120,11 @@ class GroupController extends Controller
         return view('groups.change')->with($viewParams);
     }
 
+    /**
+     * グループ変更処理
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function doChange(Request $request): RedirectResponse
     {
         $groupId = $request->get('groupId');

@@ -13,11 +13,20 @@ use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
+    /**
+     * ログイン画面表示
+     * @return Factory|View|Application
+     */
     public function index(): Factory|View|Application
     {
         return view('login');
     }
 
+    /**
+     * ログイン処理
+     * @param LoginPostRequest $request
+     * @return View|Factory|RedirectResponse|Application
+     */
     public function login(LoginPostRequest $request): View|Factory|RedirectResponse|Application
     {
         $name = $request->get('name');
