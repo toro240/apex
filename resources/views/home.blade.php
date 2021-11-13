@@ -1,3 +1,4 @@
+@inject('taskConstants', 'App\Models\Task')
 @extends('layouts.app')
 
 @section('content')
@@ -10,6 +11,53 @@
                 </div>
             </div>
         @endif
+        <div id="tasks" class="row">
+            @foreach($tasks as $i => $task)
+            <div class="col-sm-4 accordion mt-3" id="{{ __('task' . $task->id) }}">
+                <div class="card">
+                    <div id="{{ __('heading' . $i) }}" class="card-header">
+                        <h5 class="card-title">{{ $task->subject }}</h5>
+                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="{{ __('#collapse' . $i) }}" aria-controls="{{ __('#collapse' . $i) }}">
+                            Detail Show!
+                        </button>
+
+                        <a href="{{ route('task.edit', ['id' => $task->id]) }}" class="btn btn-primary mt-2">Edit</a>
+                    </div>
+                    <div id="{{ __('collapse' . $i) }}" class="collapse" aria-labelledby="{{ __('heading' . $i) }}" data-parent="{{ __('#task' . $task->id) }}">
+                        <div class="card-body">
+
+                            @if(!is_null($task->map))
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Map
+                                </div>
+                                <div class="col-md-6">
+                                    {{ $taskConstants::MAP[$task->map] }}
+                                </div>
+                            </div>
+                            <hr />
+                            @endif
+
+                            @if(!is_null($task->legend))
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Legend
+                                </div>
+                                <div class="col-md-6">
+                                    {{ $taskConstants::LEGEND[$task->legend] }}
+                                </div>
+                            </div>
+                            <hr />
+                            @endif
+
+                            {{ $task->contents }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+        </div>
         <div style="position: fixed; bottom: 60px; right: 30px;">
             <a href="{{ route('task.create') }}" class="btn btn-lg btn-danger rounded-circle" role="button" aria-pressed="true">
                 {{ __('+') }}

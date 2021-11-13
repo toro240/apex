@@ -9,7 +9,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Create Task') }}</div>
+                    <div class="card-header">{{ __('Edit Task') }}</div>
                     <div class="card-body">
                         @error('message')
                         <div class="alert alert-danger" role="alert">
@@ -17,13 +17,13 @@
                         </div>
                         @enderror
 
-                        <form method="POST" action="{{ route('task.store') }}">
+                        <form method="POST" action="{{ route('task.update', ['id' => $task->id]) }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="subject" class="col-md-4 col-form-label text-md-right">{{ __('Subject') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="subject" type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value="{{ old('subject') }}" required autocomplete="subject" autofocus>
+                                    <input id="subject" type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value=@if(!empty(old('subject'))) "{{ old('subject') }}" @else "{{ $task->subject }}" @endif required autocomplete="subject" autofocus>
 
                                     @error('subject')
                                     <span class="invalid-feedback" role="alert">
@@ -42,9 +42,9 @@
                                             {{ __('---') }}
                                         </option>
                                         @foreach($maps as $key => $map)
-                                        <option value="{{ $key }}" @if(old('map') == $key) selected @endif>
-                                            {{ $map }}
-                                        </option>
+                                            <option value="{{ $key }}" @if(!empty(old('map')) && old('map') == $key) selected @elseif($task->map == $key) selected @endif>
+                                                {{ $map }}
+                                            </option>
                                         @endforeach
                                     </select>
 
@@ -65,9 +65,9 @@
                                             {{ __('---') }}
                                         </option>
                                         @foreach($legends as $key => $legend)
-                                        <option value="{{ $key }}" @if(old('legend') == $key) selected @endif>
-                                            {{ $legend }}
-                                        </option>
+                                            <option value="{{ $key }}" @if(!empty(old('legend')) && old('legend') == $key) selected @elseif($task->legend == $key) selected @endif>
+                                                {{ $legend }}
+                                            </option>
                                         @endforeach
                                     </select>
 
@@ -83,7 +83,7 @@
                                 <label for="contents" class="col-md-4 col-form-label text-md-right">{{ __('Contents') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="contents" class="form-control" name="contents" rows="5" required>{{ old('contents') }}</textarea>
+                                    <textarea id="contents" class="form-control" name="contents" rows="5" required>@if(!empty(old('contents'))){{ old('contents') }}@else{{ $task->contents }}@endif</textarea>
 
                                     @error('contents')
                                     <span class="invalid-feedback" role="alert">
@@ -97,7 +97,7 @@
                                 <label for="limited-at" class="col-md-4 col-form-label text-md-right">{{ __('Limited At') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="limited-at" type="text" class="form-control @error('limitedAt') is-invalid @enderror" name="limitedAt" value="{{ old('limitedAt') }}" placeholder="2021-01-01" autocomplete="limited-at" autofocus>
+                                    <input id="limited-at" type="text" class="form-control @error('limitedAt') is-invalid @enderror" name="limitedAt" value="@if(!empty(old('limitedAt'))){{ old('limitedAt') }}@elseif(!is_null($task->limited_at)){{ $task->limited_at->format('Y-m-d') }}@endif" placeholder="2021-01-01" autocomplete="limited-at" autofocus>
 
                                     @error('limitedAt')
                                     <span class="invalid-feedback" role="alert">
@@ -111,6 +111,7 @@
                                 <label for="target-user" class="col-md-4 col-form-label text-md-right">{{ __('Target User') }}</label>
                                 <div class="col">
                                     @if(empty(app('request')->old('targetUser')))
+                                    @if(count($task->taskTargets) === 0)
                                     <div class="row multiple-form-field mb-3">
                                         <div class="col">
                                             <select id="target-user" name="targetUser[]" class="form-control">
@@ -136,6 +137,34 @@
                                         </div>
                                     </div>
                                     @else
+                                    @foreach($task->taskTargets as $i => $taskTarget)
+                                    <div class="row multiple-form-field mb-3">
+                                        <div class="col">
+                                            <select id="target-user" name="targetUser[]" class="form-control">
+                                                <option value="">
+                                                    {{ __('---') }}
+                                                </option>
+                                                @foreach($targetUsers as $targetUser)
+                                                    <option value="{{ $targetUser->user->id }}" @if($taskTarget->user_id == $targetUser->user->id) selected @endif>
+                                                        {{ $targetUser->user->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('targetUser.' . $i)
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-primary add-input-btn">＋</button>
+                                            <button type="button" class="btn btn-danger remove-input-btn" disabled>ー</button>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    @endif
+                                    @else
                                     @foreach(app('request')->old('targetUser') as $i => $oldUserId)
                                     <div class="row multiple-form-field mb-3">
                                         <div class="col">
@@ -152,7 +181,7 @@
 
                                             @error('targetUser.' . $i)
                                             <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                                <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
                                         </div>

@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @method static find(mixed $targetUser)
+ */
 class User extends Authenticatable
 {
     use HasFactory;

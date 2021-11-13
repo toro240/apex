@@ -15,6 +15,7 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('group_id')->unsigned();
             $table->string('subject');
             $table->integer('map')->unsigned()->nullable();
             $table->integer('legend')->unsigned()->nullable();
@@ -25,6 +26,7 @@ class CreateTasksTable extends Migration
         });
 
         Schema::table('tasks', function($table) {
+            $table->foreign('group_id')->references('id')->on('groups');
             $table->foreign('created_user_id')->references('id')->on('users');
         });
     }

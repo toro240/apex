@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GroupMember;
+use App\Models\Task;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,8 +18,16 @@ class HomeController extends Controller
     public function index(): Factory|View|Application
     {
         $user = Auth::user();
-        return view('home', [
-            'isJoinedGroup' => GroupMember::whereUserId($user->id)->exists()
-        ]);
+        $groupId = session('group_id');
+        $tasks = [];
+        if (!is_null($groupId)) {
+            $tasks = Task::whereGroupId($groupId)->orderBy('updated_at', 'desc')->get();
+        }
+
+        $viewParams = [
+            'isJoinedGroup' => GroupMember::whereUserId($user->id)->exists(),
+            'tasks' => $tasks,
+        ];
+        return view('home')->with($viewParams);
     }
 }

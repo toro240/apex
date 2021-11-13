@@ -1,6 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/groups/create.js": "/js/groups/create.js",
-    "/js/tasks/create.js": "/js/tasks/create.js",
+    "/js/tasks/task.js": "/js/tasks/task.js",
     "/css/app.css": "/css/app.css"
 }

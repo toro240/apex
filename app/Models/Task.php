@@ -4,7 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @method static whereId(int $id)
+ * @method static create(array $array)
+ * @method static whereGroupId(mixed $groupId)
+ */
 class Task extends Model
 {
     use HasFactory;
@@ -13,6 +19,8 @@ class Task extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected $dates = ['limited_at'];
 
     const MAX_SUBJECT_LENGTH = 255;
     const MAX_CONTENTS_LENGTH = 10000;
@@ -47,4 +55,9 @@ class Task extends Model
         18 => 'シア',
         19 => 'アッシュ',
     ];
+
+    public function taskTargets(): HasMany
+    {
+        return $this->hasMany(TaskTarget::class);
+    }
 }

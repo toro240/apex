@@ -338,21 +338,21 @@ eval("window._ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodas
 
 /***/ "./resources/js/groups/create.js":
 /*!***************************************!*\
-  !*** ./resources/js/groups/create.js ***!
+  !*** ./resources/js/groups/task.js ***!
   \***************************************/
 /***/ (() => {
 
-eval("$(function () {\n  window.formUtil.useMultipleInputForms();\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvZ3JvdXBzL2NyZWF0ZS5qcz8xN2U2Il0sIm5hbWVzIjpbIiQiLCJ3aW5kb3ciLCJmb3JtVXRpbCIsInVzZU11bHRpcGxlSW5wdXRGb3JtcyJdLCJtYXBwaW5ncyI6IkFBQUFBLENBQUMsQ0FBQyxZQUFZO0FBQ1ZDLEVBQUFBLE1BQU0sQ0FBQ0MsUUFBUCxDQUFnQkMscUJBQWhCO0FBQ0gsQ0FGQSxDQUFEIiwic291cmNlc0NvbnRlbnQiOlsiJChmdW5jdGlvbiAoKSB7XG4gICAgd2luZG93LmZvcm1VdGlsLnVzZU11bHRpcGxlSW5wdXRGb3JtcygpO1xufSlcbiJdLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvZ3JvdXBzL2NyZWF0ZS5qcy5qcyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/groups/create.js\n");
+eval("$(function () {\n  window.formUtil.useMultipleInputForms();\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvZ3JvdXBzL2NyZWF0ZS5qcz8xN2U2Il0sIm5hbWVzIjpbIiQiLCJ3aW5kb3ciLCJmb3JtVXRpbCIsInVzZU11bHRpcGxlSW5wdXRGb3JtcyJdLCJtYXBwaW5ncyI6IkFBQUFBLENBQUMsQ0FBQyxZQUFZO0FBQ1ZDLEVBQUFBLE1BQU0sQ0FBQ0MsUUFBUCxDQUFnQkMscUJBQWhCO0FBQ0gsQ0FGQSxDQUFEIiwic291cmNlc0NvbnRlbnQiOlsiJChmdW5jdGlvbiAoKSB7XG4gICAgd2luZG93LmZvcm1VdGlsLnVzZU11bHRpcGxlSW5wdXRGb3JtcygpO1xufSlcbiJdLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvZ3JvdXBzL2NyZWF0ZS5qcy5qcyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/groups/task.js\n");
 
 /***/ }),
 
 /***/ "./resources/js/tasks/create.js":
 /*!**************************************!*\
-  !*** ./resources/js/tasks/create.js ***!
+  !*** ./resources/js/tasks/task.js ***!
   \**************************************/
 /***/ (() => {
 
-eval("$(function () {\n  window.formUtil.useMultipleInputForms();\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvdGFza3MvY3JlYXRlLmpzPzQ1MTIiXSwibmFtZXMiOlsiJCIsIndpbmRvdyIsImZvcm1VdGlsIiwidXNlTXVsdGlwbGVJbnB1dEZvcm1zIl0sIm1hcHBpbmdzIjoiQUFBQUEsQ0FBQyxDQUFDLFlBQVk7QUFDVkMsRUFBQUEsTUFBTSxDQUFDQyxRQUFQLENBQWdCQyxxQkFBaEI7QUFDSCxDQUZBLENBQUQiLCJzb3VyY2VzQ29udGVudCI6WyIkKGZ1bmN0aW9uICgpIHtcbiAgICB3aW5kb3cuZm9ybVV0aWwudXNlTXVsdGlwbGVJbnB1dEZvcm1zKCk7XG59KVxuIl0sImZpbGUiOiIuL3Jlc291cmNlcy9qcy90YXNrcy9jcmVhdGUuanMuanMiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/js/tasks/create.js\n");
+eval("$(function () {\n  window.formUtil.useMultipleInputForms();\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvdGFza3MvY3JlYXRlLmpzPzQ1MTIiXSwibmFtZXMiOlsiJCIsIndpbmRvdyIsImZvcm1VdGlsIiwidXNlTXVsdGlwbGVJbnB1dEZvcm1zIl0sIm1hcHBpbmdzIjoiQUFBQUEsQ0FBQyxDQUFDLFlBQVk7QUFDVkMsRUFBQUEsTUFBTSxDQUFDQyxRQUFQLENBQWdCQyxxQkFBaEI7QUFDSCxDQUZBLENBQUQiLCJzb3VyY2VzQ29udGVudCI6WyIkKGZ1bmN0aW9uICgpIHtcbiAgICB3aW5kb3cuZm9ybVV0aWwudXNlTXVsdGlwbGVJbnB1dEZvcm1zKCk7XG59KVxuIl0sImZpbGUiOiIuL3Jlc291cmNlcy9qcy90YXNrcy9jcmVhdGUuanMuanMiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/js/tasks/task.js\n");
 
 /***/ }),
 
@@ -422,7 +422,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -436,17 +436,17 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
@@ -459,7 +459,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -471,12 +471,12 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -487,7 +487,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/node module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nmd = (module) => {
@@ -496,9 +496,9 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			return module;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	
+/******/
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval-source-map devtool is used.
@@ -506,6 +506,6 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	__webpack_require__("./resources/js/bootstrap.js");
 /******/ 	__webpack_require__("./resources/js/groups/create.js");
 /******/ 	var __webpack_exports__ = __webpack_require__("./resources/js/tasks/create.js");
-/******/ 	
+/******/
 /******/ })()
 ;

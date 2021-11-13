@@ -1,5 +1,5 @@
 @php
-$jsPass = 'js/groups/create.js';
+$jsPass = 'js/groups/task.js';
 @endphp
 @extends('layouts.app')
 
