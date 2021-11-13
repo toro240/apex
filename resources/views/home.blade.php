@@ -14,9 +14,9 @@
         <div id="tasks" class="row">
             @foreach($tasks as $i => $task)
             <div class="col-sm-4 accordion mt-3" id="{{ __('task' . $task->id) }}">
-                <div class="card">
+                <div class="card @if($task->isLimitOver) border-danger @endif">
                     <div id="{{ __('heading' . $i) }}" class="card-header">
-                        <h5 class="card-title">{{ $task->subject }}</h5>
+                        <h5 class="card-title @if($task->isLimitOver) text-danger @endif">{{ $task->subject }}</h5>
                         <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="{{ __('#collapse' . $i) }}" aria-controls="{{ __('#collapse' . $i) }}">
                             Detail Show!
                         </button>
@@ -48,6 +48,18 @@
                                 </div>
                             </div>
                             <hr />
+                            @endif
+
+                            @if(!is_null($task->limited_at))
+                                <div class="row @if($task->isLimitOver) text-danger @endif">
+                                    <div class="col-md-4">
+                                        Limited At
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ $task->limited_at->format('Y-m-d') }}
+                                    </div>
+                                </div>
+                                <hr />
                             @endif
 
                             {{ $task->contents }}

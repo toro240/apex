@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GroupMember;
 use App\Models\Task;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -22,6 +23,9 @@ class HomeController extends Controller
         $tasks = [];
         if (!is_null($groupId)) {
             $tasks = Task::whereGroupId($groupId)->orderBy('updated_at', 'desc')->get();
+            foreach ($tasks as &$task) {
+                $task['isLimitOver'] = !is_null($task->limited_at) && Carbon::now()->gt(Carbon::parse($task->limited_at));
+            }
         }
 
         $viewParams = [
