@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Tasks;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tasks\TaskPostRequest;
-use App\Models\Group;
 use App\Models\GroupMember;
 use App\Models\Task;
 use App\Models\TaskTarget;
@@ -13,7 +12,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -115,6 +113,7 @@ class TaskController extends Controller
     {
         $groupId = session('group_id');
         abort_if(is_null($groupId), Response::HTTP_FORBIDDEN);
+        abort_if(!Task::whereId($id)->whereGroupId($groupId)->exists(), Response::HTTP_BAD_REQUEST);
 
         DB::transaction(function() use($request, $groupId, $id) {
             $subject = $request->get('subject');
@@ -152,6 +151,40 @@ class TaskController extends Controller
             }
         });
 
+        return Redirect::to('/home');
+    }
+
+    /**
+     * task_targets からログイン中のユーザを削除する
+     * @param int $id task.id
+     * @return RedirectResponse
+     */
+    public function removeMe(int $id): RedirectResponse
+    {
+        $groupId = session('group_id');
+        abort_if(is_null($groupId), Response::HTTP_FORBIDDEN);
+        abort_if(!Task::whereId($id)->whereGroupId($groupId)->exists(), Response::HTTP_BAD_REQUEST);
+
+        $authUser = Auth::user();
+        TaskTarget::whereTaskId($id)->whereUserId($authUser->id)->delete();
+        return Redirect::to('/home');
+    }
+
+    /**
+     * 課題の削除処理
+     * @param int $id task.id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id): RedirectResponse
+    {
+        $groupId = session('group_id');
+        abort_if(is_null($groupId), Response::HTTP_FORBIDDEN);
+        abort_if(!Task::whereId($id)->whereGroupId($groupId)->exists(), Response::HTTP_BAD_REQUEST);
+
+        DB::transaction(function() use($groupId, $id) {
+            TaskTarget::whereTaskId($id)->delete();
+            Task::whereId($id)->whereGroupId($groupId)->delete();
+        });
         return Redirect::to('/home');
     }
 }

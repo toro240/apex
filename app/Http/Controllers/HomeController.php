@@ -25,6 +25,9 @@ class HomeController extends Controller
             $tasks = Task::whereGroupId($groupId)->orderBy('updated_at', 'desc')->get();
             foreach ($tasks as &$task) {
                 $task['isLimitOver'] = !is_null($task->limited_at) && Carbon::now()->gt(Carbon::parse($task->limited_at));
+                $task['isMeTarget'] = in_array($user->id , $task->taskTargets->map(function($v) {
+                    return $v->user_id;
+                })->toArray());
             }
         }
 
