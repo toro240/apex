@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static whereUserId($id)
+ * @method static whereGroupId(mixed $groupId)
  */
 class GroupMember extends Model
 {
@@ -21,5 +22,10 @@ class GroupMember extends Model
     public function group(): BelongsTo
     {
         return $this->belongsTo(Group::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

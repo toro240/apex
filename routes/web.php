@@ -35,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/group/change', 'Groups\ChangeController@index')->name('group.change.index');
         Route::post('/group/change', 'Groups\ChangeController@update')->name('group.change.update');
+
+        Route::get('/task/create', 'Tasks\TaskController@create')->name('task.create');
+        Route::post('/task', 'Tasks\TaskController@store')->name('task.store');
     });
 });
 

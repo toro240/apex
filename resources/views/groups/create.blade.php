@@ -1,5 +1,5 @@
 @php
-    $jsPass = 'js/groups/create.js';
+$jsPass = 'js/groups/create.js';
 @endphp
 @extends('layouts.app')
 
@@ -33,52 +33,47 @@
                                 </div>
                             </div>
 
-                            @if(empty(app('request')->old('userName')))
-                                <div class="form-group row user-name">
-                                    <label for="user-name" class="col-md-4 col-form-label text-md-right user-name-label">{{ __('Invite User Name') }}</label>
 
-                                    <div class="col">
-                                        <input type="text" class="input-user-name form-control @error('userName.0') is-invalid @enderror" name="userName[]" value="{{ old('userName.0') }}" autocomplete="user-name" autofocus>
-
-                                        @error('userName.0')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                    <div class="col">
-                                        <button type="button" class="btn btn-primary add-user-name-btn">＋</button>
-                                    </div>
-                                </div>
-                            @else
-                                @foreach(app('request')->old('userName') as $i => $userNames)
-                                    <div class="form-group row user-name">
-                                        <label for="user-name" class="col-md-4 col-form-label text-md-right user-name-label">
-                                        @if ($loop->first)
-                                            {{ __('Invite User Name') }}
-                                        @endif
-                                        </label>
-
+                            <div class="form-group row user-name">
+                                <label for="user-name" class="col-md-4 col-form-label text-md-right user-name-label">{{ __('Invite User Name') }}</label>
+                                <div class="col">
+                                    @if(empty(app('request')->old('userName')))
+                                    <div class="row multiple-form-field mb-3">
                                         <div class="col">
-                                            <input type="text" class="input-user-name form-control @error('userName.' . $i) is-invalid @enderror" name="userName[]" value="{{ old('userName.' . $i) }}" autocomplete="user-name" autofocus>
+                                            <input type="text" class="multiple-form-input form-control @error('userName.0') is-invalid @enderror" name="userName[]" value="{{ old('userName.0') }}" autocomplete="user-name" autofocus>
 
-                                            @error('userName.' . $i)
+                                            @error('userName.0')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-primary add-input-btn">＋</button>
+                                            <button type="button" class="btn btn-danger remove-input-btn" disabled>ー</button>
+                                        </div>
+                                    </div>
+                                    @else
+                                    @foreach(app('request')->old('userName') as $i => $userNames)
+                                        <div class="row multiple-form-field mb-3">
+                                            <div class="col">
+                                                <input type="text" class="multiple-form-input form-control @error('userName.' . $i) is-invalid @enderror" name="userName[]" value="{{ old('userName.' . $i) }}" autocomplete="user-name" autofocus>
+
+                                                @error('userName.' . $i)
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
-                                            @enderror
+                                                @enderror
+                                            </div>
+                                            <div class="col">
+                                                <button type="button" class="btn btn-primary add-input-btn">＋</button>
+                                                <button type="button" class="btn btn-danger remove-input-btn" disabled>ー</button>
+                                            </div>
                                         </div>
-
-                                        <div class="col">
-                                            @if ($loop->first)
-                                                <button type="button" class="btn btn-primary add-user-name-btn">＋</button>
-                                            @endif
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-
-
+                                    @endforeach
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">

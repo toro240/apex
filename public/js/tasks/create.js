@@ -9,13 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/js/groups/create.js":
-/*!***************************************!*\
-  !*** ./resources/js/groups/create.js ***!
-  \***************************************/
+/***/ "./resources/js/tasks/create.js":
+/*!**************************************!*\
+  !*** ./resources/js/tasks/create.js ***!
+  \**************************************/
 /***/ (() => {
 
-eval("$(function () {\n  window.formUtil.useMultipleInputForms();\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvZ3JvdXBzL2NyZWF0ZS5qcz8xN2U2Il0sIm5hbWVzIjpbIiQiLCJ3aW5kb3ciLCJmb3JtVXRpbCIsInVzZU11bHRpcGxlSW5wdXRGb3JtcyJdLCJtYXBwaW5ncyI6IkFBQUFBLENBQUMsQ0FBQyxZQUFZO0FBQ1ZDLEVBQUFBLE1BQU0sQ0FBQ0MsUUFBUCxDQUFnQkMscUJBQWhCO0FBQ0gsQ0FGQSxDQUFEIiwic291cmNlc0NvbnRlbnQiOlsiJChmdW5jdGlvbiAoKSB7XG4gICAgd2luZG93LmZvcm1VdGlsLnVzZU11bHRpcGxlSW5wdXRGb3JtcygpO1xufSlcbiJdLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvZ3JvdXBzL2NyZWF0ZS5qcy5qcyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/groups/create.js\n");
+eval("$(function () {\n  window.formUtil.useMultipleInputForms();\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvdGFza3MvY3JlYXRlLmpzPzQ1MTIiXSwibmFtZXMiOlsiJCIsIndpbmRvdyIsImZvcm1VdGlsIiwidXNlTXVsdGlwbGVJbnB1dEZvcm1zIl0sIm1hcHBpbmdzIjoiQUFBQUEsQ0FBQyxDQUFDLFlBQVk7QUFDVkMsRUFBQUEsTUFBTSxDQUFDQyxRQUFQLENBQWdCQyxxQkFBaEI7QUFDSCxDQUZBLENBQUQiLCJzb3VyY2VzQ29udGVudCI6WyIkKGZ1bmN0aW9uICgpIHtcbiAgICB3aW5kb3cuZm9ybVV0aWwudXNlTXVsdGlwbGVJbnB1dEZvcm1zKCk7XG59KVxuIl0sImZpbGUiOiIuL3Jlc291cmNlcy9qcy90YXNrcy9jcmVhdGUuanMuanMiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/js/tasks/create.js\n");
 
 /***/ })
 
@@ -26,7 +26,7 @@ eval("$(function () {\n  window.formUtil.useMultipleInputForms();\n});//# source
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval-source-map devtool is used.
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./resources/js/groups/create.js"]();
+/******/ 	__webpack_modules__["./resources/js/tasks/create.js"]();
 /******/ 	
 /******/ })()
 ;

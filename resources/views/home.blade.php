@@ -10,6 +10,10 @@
                 </div>
             </div>
         @endif
-        HOME
+        <div style="position: fixed; bottom: 60px; right: 30px;">
+            <a href="{{ route('task.create') }}" class="btn btn-lg btn-danger rounded-circle" role="button" aria-pressed="true">
+                {{ __('+') }}
+            </a>
+        </div>
     </div>
 @endsection
