@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Tasks;
 
 use App\Models\Task;
+use App\Rules\ContainListRule;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -31,19 +32,18 @@ class TaskPostRequest extends FormRequest
                 'max:' . Task::MAX_SUBJECT_LENGTH,
             ],
             'map' => [
-
+                new ContainListRule(Task::MAP),
             ],
             'legend' => [
-
+                new ContainListRule(Task::LEGEND),
             ],
             'contents' => [
                 'required',
+                'max:' . Task::MAX_CONTENTS_LENGTH,
             ],
             'limitedAt' => [
-
-            ],
-            'targetUser' => [
-
+                'nullable',
+                'date' => 'date_format:Y-m-d',
             ],
         ];
     }

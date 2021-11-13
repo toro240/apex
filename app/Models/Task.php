@@ -15,6 +15,7 @@ class Task extends Model
     ];
 
     const MAX_SUBJECT_LENGTH = 255;
+    const MAX_CONTENTS_LENGTH = 10000;
 
     // TODO get Google Spread Sheet
     const MAP = [

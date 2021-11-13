@@ -42,7 +42,7 @@
                                             {{ __('---') }}
                                         </option>
                                         @foreach($maps as $key => $map)
-                                        <option value="{{ $key }}">
+                                        <option value="{{ $key }}" @if(old('map') == $key) selected @endif>
                                             {{ $map }}
                                         </option>
                                         @endforeach
@@ -65,7 +65,7 @@
                                             {{ __('---') }}
                                         </option>
                                         @foreach($legends as $key => $legend)
-                                        <option value="{{ $key }}">
+                                        <option value="{{ $key }}" @if(old('legend') == $key) selected @endif>
                                             {{ $legend }}
                                         </option>
                                         @endforeach
@@ -83,7 +83,7 @@
                                 <label for="contents" class="col-md-4 col-form-label text-md-right">{{ __('Contents') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="contents" name="contents" class="form-control" rows="5" required></textarea>
+                                    <textarea id="contents" class="form-control" name="contents" rows="5" required>{{ old('contents') }}</textarea>
 
                                     @error('contents')
                                     <span class="invalid-feedback" role="alert">
@@ -97,7 +97,7 @@
                                 <label for="limited-at" class="col-md-4 col-form-label text-md-right">{{ __('Limited At') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="limited-at" type="text" class="form-control @error('limitedAt') is-invalid @enderror" name="limitedAt" value="{{ old('limitedAt') }}" autocomplete="limited-at" autofocus>
+                                    <input id="limited-at" type="text" class="form-control @error('limitedAt') is-invalid @enderror" name="limitedAt" value="{{ old('limitedAt') }}" placeholder="2021-01-01" autocomplete="limited-at" autofocus>
 
                                     @error('limitedAt')
                                     <span class="invalid-feedback" role="alert">
@@ -113,12 +113,12 @@
                                     @if(empty(app('request')->old('targetUser')))
                                     <div class="row multiple-form-field mb-3">
                                         <div class="col">
-                                            <select id="target-user" name="targetUser" class="form-control">
+                                            <select id="target-user" name="targetUser[]" class="form-control">
                                                 <option value="">
                                                     {{ __('---') }}
                                                 </option>
                                                 @foreach($targetUsers as $key => $targetUser)
-                                                    <option value="{{ $key }}">
+                                                    <option value="{{ $targetUser->user->id }}">
                                                         {{ $targetUser->user->name }}
                                                     </option>
                                                 @endforeach
@@ -136,24 +136,24 @@
                                         </div>
                                     </div>
                                     @else
-                                    @foreach(app('request')->old('targetUser') as $i => $targetUser)
+                                    @foreach(app('request')->old('targetUser') as $i => $oldUserId)
                                     <div class="row multiple-form-field mb-3">
                                         <div class="col">
-                                            <select id="target-user" name="targetUser" class="form-control">
+                                            <select id="target-user" name="targetUser[]" class="form-control">
                                                 <option value="">
                                                     {{ __('---') }}
                                                 </option>
-                                                @foreach($targetUsers as $key => $targetUser)
-                                                    <option value="{{ $key }}">
-                                                        {{ $targetUser->user->name }}
-                                                    </option>
+                                                @foreach($targetUsers as $targetUser)
+                                                <option value="{{ $targetUser->user->id }}" @if($oldUserId == $targetUser->user->id) selected @endif>
+                                                    {{ $targetUser->user->name }}
+                                                </option>
                                                 @endforeach
                                             </select>
 
-                                            @error('userName.' . $i)
+                                            @error('targetUser.' . $i)
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
-                                        </span>
+                                            </span>
                                             @enderror
                                         </div>
                                         <div class="col">
