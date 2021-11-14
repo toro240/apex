@@ -42,6 +42,7 @@ class HomeController extends Controller
         $viewParams = [
             'isJoinedGroup' => GroupMember::whereUserId($user->id)->exists(),
             'tasks' => $tasks,
+            'targetUsers' => GroupMember::whereGroupId($groupId)->get(),
         ];
         return view('home')->with($viewParams);
     }
