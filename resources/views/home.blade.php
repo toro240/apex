@@ -64,7 +64,7 @@
                             <hr />
                             @endif
 
-                            {{ $task->contents }}
+                            {!! nl2br(e($task->contents)) !!}
                             <hr />
                             <div class="row">
                                 <div class="col d-flex justify-content-start">
