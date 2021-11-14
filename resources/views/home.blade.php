@@ -113,7 +113,7 @@
                                 <label for="modal-subject" class="col-md-4 col-form-label text-md-right">{{ __('Subject') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="modal-subject" name="subject" type="text" class="form-control" autocomplete="modal-subject" autofocus>
+                                    <input id="modal-subject" name="subject" type="text" class="form-control" autocomplete="modal-subject" autofocus value="{{ $taskSearchCriteria->getSubject() }}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -123,7 +123,7 @@
                                 <div class="col-md-6">
                                     @foreach($taskConstants::MAP as $i => $map)
                                         <div class="form-check form-check-inline">
-                                            <input id="{{ __('modal-map' . $i) }}" type="checkbox" class="form-check-input" name="map[]" value="{{ $i }}">
+                                            <input id="{{ __('modal-map' . $i) }}" type="checkbox" class="form-check-input" name="map[]" value="{{ $i }}" @if(in_array($i, $taskSearchCriteria->getMaps())) checked @endif>
                                             <label class="form-check-label" for="{{ __('modal-map' . $i) }}">{{ $map }}</label>
                                         </div>
                                     @endforeach
@@ -137,7 +137,7 @@
                                 <div class="col-md-6">
                                     @foreach($taskConstants::LEGEND as $i => $legend)
                                         <div class="form-check form-check-inline">
-                                            <input id="{{ __('modal-legend' . $i) }}" type="checkbox" class="form-check-input" name="legend[]" value="{{ $i }}">
+                                            <input id="{{ __('modal-legend' . $i) }}" type="checkbox" class="form-check-input" name="legend[]" value="{{ $i }}" @if(in_array($i, $taskSearchCriteria->getLegends())) checked @endif>
                                             <label class="form-check-label" for="{{ __('modal-legend' . $i) }}">{{ $legend }}</label>
                                         </div>
                                     @endforeach
@@ -148,7 +148,7 @@
                                 <label for="modal-contents" class="col-md-4 col-form-label text-md-right">{{ __('Contents') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="modal-contents" type="text" class="form-control" autocomplete="modal-contents" autofocus name="contents">
+                                    <input id="modal-contents" type="text" class="form-control" autocomplete="modal-contents" autofocus name="contents" value="{{ $taskSearchCriteria->getContents() }}">
                                 </div>
                             </div>
 
@@ -158,11 +158,11 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col">
-                                            <input id="modal-limited-at-from" type="text" class="form-control" placeholder="2021-01-01(From)" autocomplete="modal-limited-at" name="limitedAtFrom" autofocus>
+                                            <input id="modal-limited-at-from" type="text" class="form-control" placeholder="2021-01-01(From)" autocomplete="modal-limited-at" name="limitedAtFrom" autofocus value="{{ $taskSearchCriteria->getLimitedAtFrom() }}">
                                         </div>
 
                                         <div class="col">
-                                            <input id="modal-limited-at-to" type="text" class="form-control" placeholder="2021-01-01(To)" autocomplete="modal-limited-at" name="limitedAtTo" autofocus>
+                                            <input id="modal-limited-at-to" type="text" class="form-control" placeholder="2021-01-01(To)" autocomplete="modal-limited-at" name="limitedAtTo" autofocus value="{{ $taskSearchCriteria->getLimitedAtTo() }}">
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                                 <div class="col-md-6">
                                     @foreach($targetUsers as $i => $targetUser)
                                         <div class="form-check form-check-inline">
-                                            <input id="{{ __('modal-member' . $i) }}" type="checkbox" class="form-check-input" name="targetUser[]" value="{{ $targetUser->user->id }}">
+                                            <input id="{{ __('modal-member' . $i) }}" type="checkbox" class="form-check-input" name="targetUser[]" value="{{ $targetUser->user->id }}" @if(in_array($targetUser->user->id, $taskSearchCriteria->getTargetUsers())) checked @endif>
                                             <label class="form-check-label" for="{{ __('modal-member' . $i) }}">{{ $targetUser->user->name }}</label>
                                         </div>
                                     @endforeach
@@ -187,7 +187,7 @@
                                 <div class="col-md-6">
                                     <select id="modal-sort" class="form-control" name="sort">
                                         @foreach($taskConstants::SORT as $key => $sort)
-                                            <option value="{{ $key }}">
+                                            <option value="{{ $key }}" @if($taskSearchCriteria->getSort() == $key) selected @endif>
                                                 {{ $sort['name'] }}
                                             </option>
                                         @endforeach

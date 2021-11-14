@@ -34,7 +34,7 @@ class TaskSearchService
             });
         }
 
-        $query->orderByRaw($taskSearchCriteria->getSort());
+        $query->orderByRaw(Task::SORT[$taskSearchCriteria->getSort()]['query']);
 
         return $query->get();
     }

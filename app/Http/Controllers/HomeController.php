@@ -49,6 +49,7 @@ class HomeController extends Controller
             'isJoinedGroup' => GroupMember::whereUserId($user->id)->exists(),
             'tasks' => $tasks,
             'targetUsers' => GroupMember::whereGroupId($groupId)->get(),
+            'taskSearchCriteria' => $taskSearchCriteria,
         ];
         return view('home')->with($viewParams);
     }
@@ -61,7 +62,7 @@ class HomeController extends Controller
     private function getTaskSearchCriteria(int $groupId, Request $request): TaskSearchCriteria
     {
         $requestSort = $request->get('sort');
-        $sort = is_null($requestSort) || !isset(Task::SORT[$requestSort]) ? Task::SORT[1]['query'] : Task::SORT[$requestSort]['query'];
+        $sort = is_null($requestSort) || !isset(Task::SORT[$requestSort]) ? 1 : $requestSort;
         $taskSearchCriteria = new TaskSearchCriteria($groupId, $sort);
         if (!$request->exists('isSearched')) {
             return $taskSearchCriteria;

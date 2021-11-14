@@ -12,7 +12,7 @@ class TaskSearchCriteria
     private ?string $limitedAtFrom = null;
     private ?string $limitedAtTo = null;
     private array $targetUsers = [];
-    private string $sort;
+    private int $sort;
 
     public function __construct($groupId, $sort)
     {
@@ -141,9 +141,9 @@ class TaskSearchCriteria
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getSort(): string
+    public function getSort(): int
     {
         return $this->sort;
     }
