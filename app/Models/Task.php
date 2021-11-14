@@ -56,6 +56,13 @@ class Task extends Model
         19 => 'アッシュ',
     ];
 
+    const SORT = [
+        1 => [
+            'name' => 'Limited At ASC.',
+            'query' => 'limited_at asc, updated_at desc',
+        ],
+    ];
+
     public function taskTargets(): HasMany
     {
         return $this->hasMany(TaskTarget::class);

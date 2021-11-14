@@ -99,104 +99,110 @@
         <div class="modal fade" id="searchTaskModal" tabindex="-1" aria-labelledby="searchTaskModal" aria-hidden="true" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">{{ __('Search Tasks') }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div id="task-modal-body" class="modal-body">
-                        <div class="form-group row">
-                            <label for="modal-subject" class="col-md-4 col-form-label text-md-right">{{ __('Subject') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="modal-subject" type="text" class="form-control" autocomplete="modal-subject" autofocus>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="modal-map" class="col-md-4 col-form-label text-md-right">{{ __('Map') }}</label>
-
-
-                            <div class="col-md-6">
-                                @foreach($taskConstants::MAP as $i => $map)
-                                <div class="form-check form-check-inline">
-                                    <input id="{{ __('modal-map' . $i) }}" type="checkbox" class="form-check-input">
-                                    <label class="form-check-label" for="{{ __('modal-map' . $i) }}">{{ $map }}</label>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="modal-legend" class="col-md-4 col-form-label text-md-right">{{ __('Legend') }}</label>
-
-
-                            <div class="col-md-6">
-                                @foreach($taskConstants::LEGEND as $i => $legend)
-                                <div class="form-check form-check-inline">
-                                    <input id="{{ __('modal-legend' . $i) }}" type="checkbox" class="form-check-input">
-                                    <label class="form-check-label" for="{{ __('modal-legend' . $i) }}">{{ $legend }}</label>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="modal-contents" class="col-md-4 col-form-label text-md-right">{{ __('Contents') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="modal-contents" type="text" class="form-control" autocomplete="modal-contents" autofocus>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="modal-limited-at" class="col-md-4 col-form-label text-md-right">{{ __('Limited At') }}</label>
-
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col">
-                                        <input id="modal-limited-at-from" type="text" class="form-control" placeholder="2021-01-01(From)" autocomplete="modal-limited-at" autofocus>
-                                    </div>
-
-                                    <div class="col">
-                                        <input id="modal-limited-at-to" type="text" class="form-control" placeholder="2021-01-01(To)" autocomplete="modal-limited-at" autofocus>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="modal-member" class="col-md-4 col-form-label text-md-right">{{ __('Target User') }}</label>
-
-                            <div class="col-md-6">
-                                @foreach($targetUsers as $i => $targetUser)
-                                <div class="form-check form-check-inline">
-                                    <input id="{{ __('modal-member' . $i) }}" type="checkbox" class="form-check-input">
-                                    <label class="form-check-label" for="{{ __('modal-member' . $i) }}">{{ $targetUser->user->name }}</label>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="modal-sort" class="col-md-4 col-form-label text-md-right">{{ __('Sort') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="modal-sort" class="form-control">
-                                    <option value="">
-                                        {{ __('---') }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="col d-flex justify-content-end">
-                            <button id="search-tasks" type="button" class="btn btn-primary">
-                                {{ __('Search') }}
+                    <form id="remove-form" method="GET" action="{{ route('home') }}">
+                        @csrf
+                        <input type="hidden" name="isSearched" value="1">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{ __('Search Tasks') }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                    </div>
+                        <div id="task-modal-body" class="modal-body">
+                            <div class="form-group row">
+                                <label for="modal-subject" class="col-md-4 col-form-label text-md-right">{{ __('Subject') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="modal-subject" name="subject" type="text" class="form-control" autocomplete="modal-subject" autofocus>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-map" class="col-md-4 col-form-label text-md-right">{{ __('Map') }}</label>
+
+
+                                <div class="col-md-6">
+                                    @foreach($taskConstants::MAP as $i => $map)
+                                        <div class="form-check form-check-inline">
+                                            <input id="{{ __('modal-map' . $i) }}" type="checkbox" class="form-check-input" name="map[]" value="{{ $i }}">
+                                            <label class="form-check-label" for="{{ __('modal-map' . $i) }}">{{ $map }}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="modal-legend" class="col-md-4 col-form-label text-md-right">{{ __('Legend') }}</label>
+
+
+                                <div class="col-md-6">
+                                    @foreach($taskConstants::LEGEND as $i => $legend)
+                                        <div class="form-check form-check-inline">
+                                            <input id="{{ __('modal-legend' . $i) }}" type="checkbox" class="form-check-input" name="legend[]" value="{{ $i }}">
+                                            <label class="form-check-label" for="{{ __('modal-legend' . $i) }}">{{ $legend }}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="modal-contents" class="col-md-4 col-form-label text-md-right">{{ __('Contents') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="modal-contents" type="text" class="form-control" autocomplete="modal-contents" autofocus name="contents">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="modal-limited-at" class="col-md-4 col-form-label text-md-right">{{ __('Limited At') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col">
+                                            <input id="modal-limited-at-from" type="text" class="form-control" placeholder="2021-01-01(From)" autocomplete="modal-limited-at" name="limitedAtFrom" autofocus>
+                                        </div>
+
+                                        <div class="col">
+                                            <input id="modal-limited-at-to" type="text" class="form-control" placeholder="2021-01-01(To)" autocomplete="modal-limited-at" name="limitedAtTo" autofocus>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="modal-member" class="col-md-4 col-form-label text-md-right">{{ __('Target User') }}</label>
+
+                                <div class="col-md-6">
+                                    @foreach($targetUsers as $i => $targetUser)
+                                        <div class="form-check form-check-inline">
+                                            <input id="{{ __('modal-member' . $i) }}" type="checkbox" class="form-check-input" name="targetUser[]" value="{{ $targetUser->user->id }}">
+                                            <label class="form-check-label" for="{{ __('modal-member' . $i) }}">{{ $targetUser->user->name }}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="modal-sort" class="col-md-4 col-form-label text-md-right">{{ __('Sort') }}</label>
+
+                                <div class="col-md-6">
+                                    <select id="modal-sort" class="form-control" name="sort">
+                                        @foreach($taskConstants::SORT as $key => $sort)
+                                            <option value="{{ $key }}">
+                                                {{ $sort['name'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col d-flex justify-content-end">
+                                <button id="search-tasks" type="submit" class="btn btn-primary">
+                                    {{ __('Search') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
