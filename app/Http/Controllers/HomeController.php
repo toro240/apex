@@ -28,6 +28,14 @@ class HomeController extends Controller
                 $task['isMeTarget'] = in_array($user->id , $task->taskTargets->map(function($v) {
                     return $v->user_id;
                 })->toArray());
+
+                $task['isAnotherTarget'] = false;
+                foreach($task->taskTargets as $taskTarget) {
+                    if ($taskTarget->user_id !== $user->id) {
+                        $task['isAnotherTarget'] = true;
+                        break;
+                    }
+                }
             }
         }
 
