@@ -60,7 +60,7 @@
                                     Limited At
                                 </div>
                                 <div class="col-md-6">
-                                    {{ $task->limited_at->format('Y-m-d') }}
+                                    {{ $task->limited_at->isoFormat('Y年M月d日(ddd)') }}
                                 </div>
                             </div>
                             <hr />
