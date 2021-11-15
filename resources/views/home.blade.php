@@ -7,7 +7,9 @@
 @section('content')
     @include('layouts.commonHeader')
     <div class="container">
+        @if(!is_null($taskSearchCriteria))
         <button style="position: sticky; top:10px; z-index: 1;" type="button" class="btn btn-primary btn-block mt-3" data-toggle="modal" data-target="#searchTaskModal">{{ __('Search Tasks') }}</button>
+        @endif
         @if(!$isJoinedGroup)
             <div class="container py-4">
                 <div class="alert alert-warning" role="alert">
@@ -96,6 +98,7 @@
             </a>
         </div>
 
+        @if(!is_null($taskSearchCriteria))
         <div class="modal fade" id="searchTaskModal" tabindex="-1" aria-labelledby="searchTaskModal" aria-hidden="true" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
@@ -206,6 +209,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <div class="modal fade" id="taskRemoveModal" tabindex="-1" aria-labelledby="taskRemoveModal" aria-hidden="true" role="dialog">
             <div class="modal-dialog modal-dialog-centered">

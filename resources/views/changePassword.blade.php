@@ -12,7 +12,7 @@
                             <strong>{{ $message }}</strong>
                         </div>
                         @enderror
-                        <form method="POST" action="{{ route('changePassword.update') }}}">
+                        <form method="POST" action="{{ route('changePassword.update') }}">
                             @csrf
 
                             <div class="form-group row">

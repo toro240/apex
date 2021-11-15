@@ -25,8 +25,9 @@ class HomeController extends Controller
         $user = Auth::user();
         $groupId = session('group_id');
         $tasks = [];
-        $taskSearchCriteria = $this->getTaskSearchCriteria($groupId, $request);
+        $taskSearchCriteria = null;
         if (!is_null($groupId)) {
+            $taskSearchCriteria = $this->getTaskSearchCriteria($groupId, $request);
             $taskSearchService = new TaskSearchService();
             $tasks = $taskSearchService->execute($taskSearchCriteria);
             foreach ($tasks as &$task) {

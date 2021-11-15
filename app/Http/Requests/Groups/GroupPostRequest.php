@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Groups;
 
 use App\Models\Group;
-use App\Rules\HalfWithAlphanumericRule;
+use App\Rules\HalfWithAlphanumericSpCharRule;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -24,7 +24,7 @@ class GroupPostRequest extends FormRequest
      *
      * @return array
      */
-    #[ArrayShape(['name' => "string[]", 'userName.*' => "\App\Rules\HalfWithAlphanumericRule[]"])] public function rules(): array
+    #[ArrayShape(['name' => "string[]", 'userName.*' => "\App\Rules\HalfWithAlphanumericSpCharRule[]"])] public function rules(): array
     {
         return [
             'name' => [
@@ -32,7 +32,7 @@ class GroupPostRequest extends FormRequest
                 'max:' . Group::MAX_NAME_LENGTH,
             ],
             'userName.*' => [
-                new HalfWithAlphanumericRule(),
+                new HalfWithAlphanumericSpCharRule(),
             ],
         ];
     }

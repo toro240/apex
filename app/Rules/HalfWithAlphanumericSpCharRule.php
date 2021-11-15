@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class HalfWithAlphanumericRule implements Rule
+class HalfWithAlphanumericSpCharRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -28,7 +28,7 @@ class HalfWithAlphanumericRule implements Rule
         if (is_null($value)) {
             return true;
         }
-        return preg_match("/^[a-zA-Z0-9]+$/", $value);
+        return preg_match("/^[a-zA-Z0-9_-]+$/", $value);
     }
 
     /**
@@ -38,6 +38,6 @@ class HalfWithAlphanumericRule implements Rule
      */
     public function message(): string
     {
-        return 'The :attribute must only contain alpha and numbers.';
+        return 'The :attribute must only contain alpha and numbers and "_", "-" .';
     }
 }

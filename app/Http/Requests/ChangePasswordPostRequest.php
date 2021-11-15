@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\User;
-use App\Rules\HalfWithAlphanumericRule;
+use App\Rules\HalfWithAlphanumericSpCharRule;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -31,13 +31,13 @@ class ChangePasswordPostRequest extends FormRequest
                 'required',
                 'min:' . User::MIN_PASSWORD_LENGTH,
                 'max:' . User::MAX_PASSWORD_LENGTH,
-                new HalfWithAlphanumericRule(),
+                new HalfWithAlphanumericSpCharRule(),
             ],
             'confirmPassword' => [
                 'required',
                 'min:' . User::MIN_PASSWORD_LENGTH,
                 'max:' . User::MAX_PASSWORD_LENGTH,
-                new HalfWithAlphanumericRule(),
+                new HalfWithAlphanumericSpCharRule(),
             ],
         ];
     }
