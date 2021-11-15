@@ -30,7 +30,7 @@ class TaskSearchService
         }
         if (!empty($taskSearchCriteria->getTargetUsers())) {
             $query->whereHas('taskTargets', function($sQuery) use($taskSearchCriteria) {
-                $sQuery->whereIn('user_id', array_merge($taskSearchCriteria->getTargetUsers()));
+                $sQuery->whereIn('user_id', $taskSearchCriteria->getTargetUsers());
             });
         }
 
