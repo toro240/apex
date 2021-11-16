@@ -162,11 +162,11 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col">
-                                            <input id="modal-limited-at-from" type="text" class="form-control" placeholder="2021-01-01(From)" autocomplete="off" name="limitedAtFrom" autofocus value="{{ $taskSearchCriteria->getLimitedAtFrom() }}">
+                                            <input id="modal-limited-at-from" type="text" class="form-control" placeholder="2021-01-01(From)" autocomplete="off" name="limitedAtFrom" value="{{ $taskSearchCriteria->getLimitedAtFrom() }}">
                                         </div>
 
                                         <div class="col">
-                                            <input id="modal-limited-at-to" type="text" class="form-control" placeholder="2021-01-01(To)" autocomplete="off" name="limitedAtTo" autofocus value="{{ $taskSearchCriteria->getLimitedAtTo() }}">
+                                            <input id="modal-limited-at-to" type="text" class="form-control" placeholder="2021-01-01(To)" autocomplete="off" name="limitedAtTo" value="{{ $taskSearchCriteria->getLimitedAtTo() }}">
                                         </div>
                                     </div>
                                 </div>
