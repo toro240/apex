@@ -97,7 +97,7 @@
                                 <label for="limited-at" class="col-md-4 col-form-label text-md-right">{{ __('Limited At') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="limited-at" type="text" class="form-control @error('limitedAt') is-invalid @enderror" name="limitedAt" value="{{ old('limitedAt') }}" placeholder="2021-01-01" autocomplete="off" autofocus>
+                                    <input id="limited-at" type="text" class="form-control @error('limitedAt') is-invalid @enderror" name="limitedAt" value="{{ old('limitedAt') }}" placeholder="2021-01-01" autocomplete="off">
 
                                     @error('limitedAt')
                                     <span class="invalid-feedback" role="alert">
