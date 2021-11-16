@@ -1,4 +1,12 @@
 $(function () {
+    $("#modal-limited-at-from").datepicker({
+        dateFormat: 'yy-mm-dd',
+    });
+    $("#modal-limited-at-to").datepicker({
+        dateFormat: 'yy-mm-dd',
+    });
+
+
     $(document).on('show.bs.modal', '#taskRemoveModal', function(event) {
         const button = $(event.relatedTarget);
         const isMeTarget = button.data('is-me-target') === 1;

@@ -1,6 +1,12 @@
 require('./bootstrap');
 
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+import 'jquery-ui/ui/widgets/datepicker.js';
+
 $(function () {
+    $.datepicker.setDefaults($.datepicker.regional["ja"]);
+
     function useMultipleInputForms() {
         const removeInputBtn = '.remove-input-btn';
         const addInputBtn = '.add-input-btn';
