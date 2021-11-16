@@ -6,7 +6,7 @@
 
 @section('content')
     @include('layouts.commonHeader')
-    <div class="container">
+    <div class="container" style="padding-bottom: 80px">
         @if(!is_null($taskSearchCriteria))
         <button style="position: sticky; top:10px; z-index: 1;" type="button" class="btn btn-primary btn-block mt-3" data-toggle="modal" data-target="#searchTaskModal">{{ __('Search Tasks') }}</button>
         @endif
@@ -92,7 +92,8 @@
 
             @endforeach
         </div>
-        <div style="position: fixed; bottom: 60px; right: 30px;">
+
+        <div style="position: fixed; bottom: 30px; right: 30px;">
             <a href="{{ route('task.create') }}" class="btn btn-lg btn-danger rounded-circle" role="button" aria-pressed="true">
                 {{ __('+') }}
             </a>
